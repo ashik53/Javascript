@@ -1,0 +1,44 @@
+<!-- 
+    example we may get from  below link - academind youtube channel
+    https://www.youtube.com/watch?v=-nYQJkMpOHU&list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi&index=3
+-->
+
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<body>
+
+<button> Click me</button>
+<script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"> </script>
+<script> 
+    
+    var observable = Rx.Observable.create([
+        {
+            id: 1
+        },
+        {
+            id: 2
+        },
+        {
+            id: 3
+        },
+        {
+            id: 3
+        }
+    ]);
+
+    observable.filter(function(value){
+        return value % 2 ==0;
+    }).subscribe({
+        next: function(value){
+            console.log(value);
+        },
+        error: function(error){
+            console.log('Error ', error);
+        }
+    })
+    
+</script>
+
+</body>
+</html

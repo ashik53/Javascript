@@ -1,0 +1,53 @@
+<!-- 
+    example we may get from  below link - academind youtube channel
+    https://www.youtube.com/watch?v=-nYQJkMpOHU&list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi&index=3
+-->
+
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<body>
+
+<button> Click me</button>
+<script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"> </script>
+<script> 
+    var button = document.querySelector('button');
+
+var observer = {
+	next: function(value){
+  		console.log(value);
+  },
+  error:  function(error){
+  		console.log(error);
+  },
+  complete: function() {
+  	console.log('Completed');
+  }
+};
+
+/*
+    This observable is can not be completed so it can cause the memory leak 
+    in order to avoid it, we should unsubscribe when we don't need the subscription odf the observable
+
+*/
+
+//so we store the subscription 
+var subscription = Rx.Observable.create(function(obs){
+	button.onclick = function(event){
+  	obs.next(event);
+  }
+}).subscribe(observer);
+
+/*
+    now it's time to unsubscribe, we will never get the value of observable after 5 seconds
+    because it is unsubscribed
+*/
+
+setTimeout(function(){
+    subscription.unsubscribe();
+}, 5000)
+
+</script>
+
+</body>
+</html

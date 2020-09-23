@@ -1,0 +1,31 @@
+<!-- 
+    practice an filter rx 
+    from an array please filter values
+-->
+
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<body>
+
+<button> Click me</button>
+<script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"> </script>
+<script> 
+    
+    var fruits = ['apple', 'orange', 'banana', 'ashik'];
+var observable = Rx.Observable.interval(1000)
+observable.take(4).map(t => { // take defines how many times observable will emit value
+    //console.log(t)
+    return fruits[t]
+    }).filter(t => {
+       return  t == 'apple' || t == 'orange' //if else condition with filter
+    })
+    .subscribe(t => {
+  console.log(t);
+  
+});
+    
+</script>
+
+</body>
+</html

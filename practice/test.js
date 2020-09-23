@@ -1,29 +1,37 @@
-
-
-/* */
-
-/*
-
-function printName(agePrint) {
-    console.log("Ashik");
-    agePrint(); // this is callback function
+function job(state) {
+    return new Promise(function(resolve, reject) {
+        if (state) {
+            resolve('success');
+        } else {
+            reject('error');
+        }
+    });
 }
 
-function agePrint(){
-    console.log("24")
-}
-printName(agePrint);
+let promise = job(true);
 
-*/
+promise
 
-const printName = (agePrint)=> {
-    console.log("Ashik");
-    agePrint();
-}
+.then(function(data) {
+    console.log(data);
 
-function agePrint(){
-    console.log("24");
-}
+    return job(false);
+})
 
+.catch(function(error) {
+    console.log(error);
 
-printName(agePrint);
+    return 'Error caught';
+})
+
+.then(function(data) {
+    console.log(data);
+
+   
+})
+
+.catch(function(error) {
+    console.log(error);
+}).then(function(){
+    console.log("last")
+});
