@@ -1,0 +1,62 @@
+<!-- 
+    example we may get from  below link - academind youtube channel
+    https://www.youtube.com/watch?v=-nYQJkMpOHU&list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi&index=3
+-->
+
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<body>
+
+
+<input type="text" id="input1">
+<input type="text" id ="input2"> 
+
+<p> combined value: <span></span></p>
+
+<script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"> </script>
+<script> 
+    
+
+    var input1 = document.querySelector("#input1");
+    var input2 = document.querySelector("#input2");
+
+    var span = document.querySelector('span')
+    
+
+    //first observable 
+    // fromEvent takes 2 parameters input1 = id & second is type(input) 
+    var obs1 = Rx.Observable.fromEvent(input1, 'input')
+        
+    //second observable
+    var obs2 = Rx.Observable.fromEvent(input2, 'input')
+    
+    //we do not subscribe to it so we will not get value
+    // we will get value now
+    //we will merge the second observable with the first one , so obs1.mergeMap
+
+    //why after entering value in second field works because in below code we use that logic. After emiting second observable we will get value
+    obs1.mergeMap(
+        event1 => {
+            return obs2.map(
+                event2 => event1.target.value + ' ' + event2.target.value
+
+                /* below example shows without using the first event value, when you need to run another service then 
+                    inside a service then you can use mergemap, think below code is another service
+                */
+
+                // (event2) =>  {
+                //     event2 = event2.target.value
+                //     return event2
+                // }
+                
+            )
+        }
+    ).subscribe((combinedValue) => {
+        span.textContent = combinedValue
+    })
+
+</script>
+
+</body>
+</html

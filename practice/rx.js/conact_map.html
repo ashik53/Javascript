@@ -1,0 +1,36 @@
+<!-- 
+    example we may get from  below link - 
+    https://www.tektutorialshub.com/angular/using-concatmap-in-angular/#concatmap-vs-map
+
+-->
+
+<!DOCTYPE html>
+<html>
+<title>HTML Tutorial</title>
+<body>
+
+<button> Click me</button>
+<script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"> </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.5/rxjs.umd.min.js"></script>
+
+<script>
+
+let srcObservable= of(1,2,3,4)
+let innerObservable= of('A','B','C','D')
+ 
+srcObservable.pipe(
+  concatMap( val => {
+    console.log('Source value '+val)
+    console.log('starting new observable')
+    return innerObservable
+  })
+)
+.subscribe(ret=> {
+  console.log('Recd ' + ret);
+})
+ 
+</script>
+
+</body>
+</html>
