@@ -1,0 +1,59 @@
+import { Component } from '@angular/core';
+
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { map, catchError, flatMap, mergeMap, toArray, tap, switchMap, concatMap, delay, filter } from 'rxjs/operators';
+import { Observable, throwError, Subject, BehaviorSubject, of } from 'rxjs';
+
+export interface Fruit {
+  name: string;
+}
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+
+
+  
+
+  constructor() {
+    this.check()
+  }
+  check(){
+    const data = of([
+      {
+        brand: 'porsche',
+        model: '911'
+      },
+      {
+        brand: 'porsche',
+        model: 'macan'
+      },
+      {
+        brand: 'ferarri',
+        model: '458'
+      },
+      {
+        brand: 'lamborghini',
+        model: 'urus'
+      },
+      {
+        brand: 'bmw',
+        model: 'urus'
+      }
+    ]);
+
+    data.pipe(
+      map(x => {
+        return x.filter(x => x.brand === 'bmw')
+      }),
+     
+      
+    ).subscribe(x => console.log(x))
+
+  }// check
+
+}
